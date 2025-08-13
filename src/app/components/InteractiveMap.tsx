@@ -1,24 +1,15 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { useMemo, useRef, useState, useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
-// Fix default marker icons in Next.js/Leaflet
-const setupLeafletIcons = () => {
-  if (typeof window === "undefined") return;
-  // @ts-expect-error: _getIconUrl does not exist in current Leaflet typings
-  delete L.Icon.Default.prototype._getIconUrl;
-
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  });
-};
-
-setupLeafletIcons();
 
 export type MapMarker = {
   id: string | number;
@@ -46,7 +37,7 @@ function ClickMarker({ onAdd }: { onAdd: (pos: [number, number]) => void }) {
 
 export default function InteractiveMap({
   className,
-  center = [-0.7050556228838573, 37.2051279116434], // Sagana Ridge exact
+  center = [-0.7050556228838573, 37.2051279116434],
   zoom = 13,
   markers = [
     {
@@ -61,6 +52,20 @@ export default function InteractiveMap({
   const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>(markers);
   const mapRef = useRef<L.Map | null>(null);
 
+  // Fix Leaflet icons only on client
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    // @ts-expect-error
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl:
+        "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+      iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+      shadowUrl:
+        "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    });
+  }, []);
+
   const handleAddMarker = (pos: [number, number]) => {
     const id = `${pos[0].toFixed(5)},${pos[1].toFixed(5)}`;
     setDynamicMarkers((prev) => [
@@ -73,8 +78,10 @@ export default function InteractiveMap({
     if (!navigator.geolocation || !mapRef.current) return;
     navigator.geolocation.getCurrentPosition(
       (res) => {
-        const { latitude, longitude } = res.coords;
-        const latlng: [number, number] = [latitude, longitude];
+        const latlng: [number, number] = [
+          res.coords.latitude,
+          res.coords.longitude,
+        ];
         mapRef.current!.flyTo(latlng, 15);
         setDynamicMarkers((prev) => [
           ...prev,
@@ -94,7 +101,11 @@ export default function InteractiveMap({
   const mapCenter = useMemo(() => center, [center]);
 
   return (
-    <div className={`relative w-full h-[70vh] rounded-2xl overflow-hidden ${className ?? ""}`}>
+    <div
+      className={`relative w-full h-[70vh] rounded-2xl overflow-hidden ${
+        className ?? ""
+      }`}
+    >
       {locateControl && (
         <button
           onClick={handleLocate}
@@ -105,37 +116,37 @@ export default function InteractiveMap({
       )}
 
       <MapContainer
-  center={mapCenter}
-  zoom={zoom}
-  scrollWheelZoom={true}
-  className="w-full h-full"
-  ref={(map) => {
-    if (map) mapRef.current = map; // save map instance
-  }}
->
-  <TileLayer
-    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />
+        center={mapCenter}
+        zoom={zoom}
+        scrollWheelZoom={true}
+        className="w-full h-full"
+        ref={(map) => {
+          if (map) mapRef.current = map; // save map instance
+        }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-  {dynamicMarkers.map((m) => (
-    <Marker key={m.id} position={m.position}>
-      <Popup>
-        <div className="space-y-1">
-          {m.title && <h4 className="font-semibold">{m.title}</h4>}
-          {m.description && (
-            <p className="text-sm text-neutral-700">{m.description}</p>
-          )}
-          <code className="text-xs block opacity-70">
-            {m.position[0].toFixed(5)}, {m.position[1].toFixed(5)}
-          </code>
-        </div>
-      </Popup>
-    </Marker>
-  ))}
+        {dynamicMarkers.map((m) => (
+          <Marker key={m.id} position={m.position}>
+            <Popup>
+              <div className="space-y-1">
+                {m.title && <h4 className="font-semibold">{m.title}</h4>}
+                {m.description && (
+                  <p className="text-sm text-neutral-700">{m.description}</p>
+                )}
+                <code className="text-xs block opacity-70">
+                  {m.position[0].toFixed(5)}, {m.position[1].toFixed(5)}
+                </code>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
 
-  <ClickMarker onAdd={handleAddMarker} />
-</MapContainer>
+        <ClickMarker onAdd={handleAddMarker} />
+      </MapContainer>
     </div>
   );
 }

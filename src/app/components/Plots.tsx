@@ -1,5 +1,9 @@
-import InteractiveMap from "./InteractiveMap";
+"use client"
+import dynamic from "next/dynamic";
 
+const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
+  ssr: false,
+});
 export default function Plots() {
   // Example featured plots (coordinates are just relative percentages for demo)
   
