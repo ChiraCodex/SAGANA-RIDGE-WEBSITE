@@ -54,7 +54,7 @@ export default function Plots() {
         <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
           Plot Locations and Sizes
         </h2>
-        <div className="w-full h-64 md:h-80 lg:h-[400px] bg-accent-gray shadow-sm relative rounded-lg overflow-hidden">
+        <div className="w-full h-68 md:h-80 lg:h-[600px] bg-accent-gray shadow-sm relative z-10 rounded-lg overflow-hidden">
           <InteractiveMap />
 
           {/* Overlay Cards */}

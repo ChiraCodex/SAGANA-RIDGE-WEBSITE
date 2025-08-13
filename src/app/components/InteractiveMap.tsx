@@ -8,9 +8,9 @@ import "leaflet/dist/leaflet.css";
 // Fix default marker icons in Next.js/Leaflet
 const setupLeafletIcons = () => {
   if (typeof window === "undefined") return;
-  // @ts-expect-error
+  // @ts-expect-error: Suppressing error because _getIconUrl is not defined in the current version of Leaflet
   delete L.Icon.Default.prototype._getIconUrl;
-  
+
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
