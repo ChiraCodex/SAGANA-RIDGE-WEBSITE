@@ -1,29 +1,23 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 // Fix default marker icons in Next.js/Leaflet
 const setupLeafletIcons = () => {
-  // Only run on client
   if (typeof window === "undefined") return;
-  // @ts-ignore - Leaflet typings don't include _getIconUrl
+  // @ts-expect-error
   delete L.Icon.Default.prototype._getIconUrl;
+  
   L.Icon.Default.mergeOptions({
-    iconRetinaUrl:
-      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
     shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   });
 };
+
 
 setupLeafletIcons();
 
@@ -39,7 +33,6 @@ export type InteractiveMapProps = {
   center?: [number, number];
   zoom?: number;
   markers?: MapMarker[];
-  /** When true, shows a floating "Locate me" button */
   locateControl?: boolean;
 };
 
@@ -54,14 +47,14 @@ function ClickMarker({ onAdd }: { onAdd: (pos: [number, number]) => void }) {
 
 export default function InteractiveMap({
   className,
-  center = [-0.7050556228838573, 37.2051279116434], // Sagana-Ridge, Kenya (approx)
+  center = [-0.7050556228838573, 37.2051279116434], // Sagana Ridge exact
   zoom = 13,
   markers = [
     {
       id: "sagana-ridge",
       position: [-0.7050556228838573, 37.2051279116434],
       title: "Sagana Ridge",
-      description: "Proposed site location (approximate).",
+      description: "Proposed site location (exact).",
     },
   ],
   locateControl = true,
@@ -94,18 +87,15 @@ export default function InteractiveMap({
           },
         ]);
       },
-      () => {
-        // optionally handle error
-      },
+      () => {},
       { enableHighAccuracy: true, timeout: 8000 }
     );
   };
 
-  // Memoize center to avoid re-renders
   const mapCenter = useMemo(() => center, [center]);
 
   return (
-    <div className={"relative w-full h-[70vh] rounded-2xl overflow-hidden " + (className ?? "") }>
+    <div className={`relative w-full h-[70vh] rounded-2xl overflow-hidden ${className ?? ""}`}>
       {locateControl && (
         <button
           onClick={handleLocate}
