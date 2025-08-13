@@ -12,7 +12,7 @@ export default function Features() {
         <div>
           <h1 className="text-lg md:text-xl font-bold mb-2">Features</h1>
           <ul className="list-disc list-inside text-sm md:text-base">
-            <li>Located 10Km from Murang'a Town</li>
+            <li>Located 10Km from Murang&apos;a Town</li>
             <li>Affordable Prices from KSh 750,000 per plot</li>
             <li>Ready title deeds</li>
             <li>Flexible payment plans</li>
@@ -25,7 +25,7 @@ export default function Features() {
         <h1 className="text-lg md:text-xl font-bold mb-2">Amenities</h1>
         <ul className="list-disc list-inside text-sm md:text-base">
           <li>Secure area</li>
-          <li>Kids Playground</li>
+          <li>Kids&apos; Playground</li>
           <li>Landscaping</li>
           <li>Access to Water & Electricity</li>
           <li>Well Maintained Murram Road</li>
