@@ -2,11 +2,7 @@ import InteractiveMap from "./InteractiveMap";
 
 export default function Plots() {
   // Example featured plots (coordinates are just relative percentages for demo)
-  const featuredPlots = [
-    { id: 1, name: "Plot A", size: "1/8 Acre", price: "KSh.750,000", top: "20%", left: "30%" },
-    { id: 2, name: "Plot B", size: "1/4 Acre", price: "KSh.900,000", top: "50%", left: "60%" },
-    { id: 3, name: "Plot C", size: "1/2 Acre", price: "KSh.1,200,000", top: "70%", left: "40%" },
-  ];
+  
 
   return (
     <main
@@ -56,19 +52,6 @@ export default function Plots() {
         </h2>
         <div className="w-full h-68 md:h-80 lg:h-[600px] bg-accent-gray shadow-sm relative z-10 rounded-lg overflow-hidden">
           <InteractiveMap />
-
-          {/* Overlay Cards */}
-          {featuredPlots.map((plot) => (
-            <div
-              key={plot.id}
-              className="absolute bg-white p-2 rounded-lg shadow-lg w-36 text-sm md:text-base"
-              style={{ top: plot.top, left: plot.left }}
-            >
-              <h3 className="font-bold">{plot.name}</h3>
-              <p>{plot.size}</p>
-              <p className="text-brand-primary font-semibold">{plot.price}</p>
-            </div>
-          ))}
         </div>
       </div>
     </main>

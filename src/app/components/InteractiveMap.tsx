@@ -53,7 +53,7 @@ export default function InteractiveMap({
       id: "sagana-ridge",
       position: [-0.7050556228838573, 37.2051279116434],
       title: "Sagana Ridge",
-      description: "Proposed site location (exact).",
+      description: "Project site location.",
     },
   ],
   locateControl = true,
@@ -105,14 +105,15 @@ export default function InteractiveMap({
       )}
 
       <MapContainer
-        center={mapCenter}
-        zoom={zoom}
-        scrollWheelZoom
-        className="w-full h-full"
-        whenReady={({ target: map }: { target: L.Map }) => {
-          mapRef.current = map;
-        }}
-      >
+  center={mapCenter}
+  zoom={zoom}
+  scrollWheelZoom={true}
+  className="w-full h-full"
+  whenCreated={(map: L.Map | null) => {
+    mapRef.current = map;
+  }}
+>
+
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
