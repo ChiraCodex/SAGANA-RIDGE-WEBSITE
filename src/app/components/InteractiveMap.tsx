@@ -53,7 +53,7 @@ export default function InteractiveMap({
       id: "sagana-ridge",
       position: [-0.7050556228838573, 37.2051279116434],
       title: "Sagana Ridge",
-      description: "Project site location.",
+      description: "Sagana Ridge Project Site (exact).",
     },
   ],
   locateControl = true,
@@ -109,32 +109,33 @@ export default function InteractiveMap({
   zoom={zoom}
   scrollWheelZoom={true}
   className="w-full h-full"
-  whenCreated={(map: L.Map | null) => {
-    mapRef.current = map;
+  ref={(map) => {
+    if (map) mapRef.current = map; // save map instance
   }}
 >
+  <TileLayer
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
 
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+  {dynamicMarkers.map((m) => (
+    <Marker key={m.id} position={m.position}>
+      <Popup>
+        <div className="space-y-1">
+          {m.title && <h4 className="font-semibold">{m.title}</h4>}
+          {m.description && (
+            <p className="text-sm text-neutral-700">{m.description}</p>
+          )}
+          <code className="text-xs block opacity-70">
+            {m.position[0].toFixed(5)}, {m.position[1].toFixed(5)}
+          </code>
+        </div>
+      </Popup>
+    </Marker>
+  ))}
 
-        {dynamicMarkers.map((m) => (
-          <Marker key={m.id} position={m.position}>
-            <Popup>
-              <div className="space-y-1">
-                {m.title && <h4 className="font-semibold">{m.title}</h4>}
-                {m.description && <p className="text-sm text-neutral-700">{m.description}</p>}
-                <code className="text-xs block opacity-70">
-                  {m.position[0].toFixed(5)}, {m.position[1].toFixed(5)}
-                </code>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-
-        <ClickMarker onAdd={handleAddMarker} />
-      </MapContainer>
+  <ClickMarker onAdd={handleAddMarker} />
+</MapContainer>
     </div>
   );
 }
