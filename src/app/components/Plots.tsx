@@ -1,0 +1,76 @@
+import InteractiveMap from "./InteractiveMap";
+
+export default function Plots() {
+  // Example featured plots (coordinates are just relative percentages for demo)
+  const featuredPlots = [
+    { id: 1, name: "Plot A", size: "1/8 Acre", price: "KSh.750,000", top: "20%", left: "30%" },
+    { id: 2, name: "Plot B", size: "1/4 Acre", price: "KSh.900,000", top: "50%", left: "60%" },
+    { id: 3, name: "Plot C", size: "1/2 Acre", price: "KSh.1,200,000", top: "70%", left: "40%" },
+  ];
+
+  return (
+    <main
+      id="plots"
+      className="relative flex flex-col lg:flex-row gap-8 min-h-[80vh] px-4 md:px-10 lg:px-20 pt-20"
+    >
+      {/* Plot Listings */}
+      <div className="flex-1 flex flex-col gap-8">
+        <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
+          Available Plots
+        </h2>
+
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Listings */}
+          <div className="flex-1">
+            <p className="mb-2">Listings of residential and commercial plots:</p>
+            <ul className="list-disc list-inside">
+              <li>1/8-Acre Residential Plots @ KSh.750,000</li>
+              <li>6 Commercial Plots @ KSh.900,000</li>
+            </ul>
+          </div>
+
+          {/* Payment Plans */}
+          <div className="flex-1">
+            <h3 className="uppercase font-bold text-lg md:text-xl mb-2 text-brand-primary">
+              Payment Plans
+            </h3>
+            <p className="mb-2">
+              Sagana Ridge offers aspiring homeowners a flexible payment plan
+            </p>
+            <p className="mb-2">Residential Plots Payment Plans:</p>
+            <ul className="list-disc list-inside">
+              <li>
+                Limited Time Offer @ KSh.700,000 with KSh.140,000 deposit with a
+                balance payment period of <strong>90 days</strong>
+              </li>
+              <li>1/8 Acre serviced plots @ KSh.750,000</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Map */}
+      <div className="flex-1 mt-8 lg:mt-0 relative">
+        <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
+          Plot Locations and Sizes
+        </h2>
+        <div className="w-full h-64 md:h-80 lg:h-[400px] bg-accent-gray shadow-sm relative rounded-lg overflow-hidden">
+          <InteractiveMap />
+
+          {/* Overlay Cards */}
+          {featuredPlots.map((plot) => (
+            <div
+              key={plot.id}
+              className="absolute bg-white p-2 rounded-lg shadow-lg w-36 text-sm md:text-base"
+              style={{ top: plot.top, left: plot.left }}
+            >
+              <h3 className="font-bold">{plot.name}</h3>
+              <p>{plot.size}</p>
+              <p className="text-brand-primary font-semibold">{plot.price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
