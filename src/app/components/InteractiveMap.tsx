@@ -79,25 +79,26 @@ export default function InteractiveMap({
   const handleLocate = () => {
     if (!navigator.geolocation || !mapRef.current) return;
     navigator.geolocation.getCurrentPosition(
-      (res) => {
-        const latlng: [number, number] = [
-          res.coords.latitude,
-          res.coords.longitude,
-        ];
-        mapRef.current!.flyTo(latlng, 15);
-        setDynamicMarkers((prev) => [
-          ...prev,
-          {
-            id: "you-are-here",
-            position: latlng,
-            title: "You are here",
-            description: new Date().toLocaleString(),
-          },
-        ]);
+  (res: GeolocationPosition) => {
+    const latlng: [number, number] = [
+      res.coords.latitude,
+      res.coords.longitude,
+    ];
+    mapRef.current!.flyTo(latlng, 15);
+    setDynamicMarkers((prev) => [
+      ...prev,
+      {
+        id: "you-are-here",
+        position: latlng,
+        title: "You are here",
+        description: new Date().toLocaleString(),
       },
-      () => {},
-      { enableHighAccuracy: true, timeout: 8000 }
-    );
+    ]);
+  },
+  () => {},
+  { enableHighAccuracy: true, timeout: 8000 }
+);
+
   };
 
   const mapCenter = useMemo(() => center, [center]);

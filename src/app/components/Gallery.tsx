@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
 export default function Gallery() {
@@ -18,23 +18,20 @@ export default function Gallery() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Autoplay every 3s
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const nextSlide = () => {
+  // useCallback ensures stable reference for useEffect
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
+  }, [images.length]);
 
   const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
+
+  // Autoplay every 5s
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [nextSlide]); // ✅ include nextSlide
 
   // For sliding effect, we offset translateX based on index
   const getSlideStyle = (index: number) => {
