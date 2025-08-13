@@ -1,6 +1,6 @@
 import Image from "next/image";
 import heroBg from '../../../public/images/bg.jpg';
-import { ChevronDown, MouseIcon } from "lucide-react";
+import {  MouseIcon } from "lucide-react";
 
 export default function Hero() {
   return (
