@@ -55,8 +55,9 @@ export default function InteractiveMap({
   // Fix Leaflet icons only on client
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // @ts-expect-error
+    // @ts-expect-error: _getIconUrl does not exist in current Leaflet typings
     delete L.Icon.Default.prototype._getIconUrl;
+
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
