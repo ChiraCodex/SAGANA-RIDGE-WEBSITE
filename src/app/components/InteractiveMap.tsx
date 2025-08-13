@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.css";
 // Fix default marker icons in Next.js/Leaflet
 const setupLeafletIcons = () => {
   if (typeof window === "undefined") return;
-  // @ts-expect-error: Suppressing error because _getIconUrl is not defined in the current version of Leaflet
+  // @ts-expect-error: _getIconUrl does not exist in current Leaflet typings
   delete L.Icon.Default.prototype._getIconUrl;
 
   L.Icon.Default.mergeOptions({
@@ -17,7 +17,6 @@ const setupLeafletIcons = () => {
     shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   });
 };
-
 
 setupLeafletIcons();
 
