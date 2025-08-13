@@ -1,7 +1,7 @@
 export default function Contacts() {
   return (
-    <main id="contacts" className="min-h-[100vh] pt-40 px-4 md:px-10 lg:px-20 mb-4">
-      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-center">
+    <main id="contacts" className="min-h-[100vh] scroll-mt-[200px] px-4 md:px-10 lg:px-20 mb-4">
+      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-left">
         contact us
       </h2>
 
@@ -40,7 +40,7 @@ export default function Contacts() {
 
         {/* Contact Form */}
         <div className="flex-1">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">Message Us</h1>
+          <h1 className=" text-brand-primary text-2xl md:text-3xl font-bold mb-2">Message Us</h1>
           <p className="mb-4">Please fill out the form below to get in touch.</p>
           <form className="flex flex-col gap-4" action="#">
             <label className="grid gap-1" htmlFor="name">

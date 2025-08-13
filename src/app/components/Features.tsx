@@ -2,7 +2,7 @@ export default function Features() {
   return (
     <main
       id="features"
-      className="relative min-h-[100vh] flex flex-col lg:flex-row gap-8 lg:gap-10 pt-32 px-4 md:px-10 lg:px-20 z-10"
+      className="relative min-h-[100vh] flex flex-col lg:flex-row gap-8 lg:gap-10 scroll-mt-[200px] px-4 md:px-10 lg:px-20 z-10"
     >
       {/* Why Choose Sagana Ridge */}
       <div className="flex-1 lg:w-1/4 flex flex-col gap-4 px-4 py-6 bg-accent-brown text-white rounded-lg">

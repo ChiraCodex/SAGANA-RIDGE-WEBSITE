@@ -56,6 +56,9 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+      <div className="mt-6">
+        <span className="text-xs  flex justify-center mb-2">Sagana Ridge Development Ltd.&copy; All Rights Reserved. 2025</span>
+      </div>
     </main>
   );
 }

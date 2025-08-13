@@ -64,8 +64,8 @@ export default function FAQ() {
   };
 
   return (
-    <div className="max-w-2xl p-6">
-      <div className="space-y-4">
+    <div className=" p-6">
+      <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-center">
         {faqs.map((faq, index) => (
           <div key={index} className="border rounded-lg shadow-sm">
             <button

@@ -4,17 +4,16 @@ import Image from "next/image";
 
 export default function Gallery() {
   const images = [
-    { src: "/images/1.jpg", description: "Modern 3-Bedroom Bungalow" },
-    { src: "/images/2.jpg", description: "Elegant Flat Roof Design" },
-    { src: "/images/3.jpg", description: "Spacious Open Living Area" },
-    { src: "/images/4.jpg", description: "Country Style Roof Exterior" },
-    { src: "/images/5.jpg", description: "Luxury Villa Poolside View" },
-    { src: "/images/6.jpg", description: "Minimalist Kitchen Design" },
-    { src: "/images/7.jpg", description: "Contemporary Garden Patio" },
-    { src: "/images/8.jpg", description: "4-Bedroom Villa Floor Plan" },
-    { src: "/images/9.jpg", description: "Country Roof Farmhouse" },
-    { src: "/images/10.jpg", description: "Elegant Entrance Porch" },
-    { src: "/images/11.jpg", description: "Modern Bedroom Interior" },
+    { src: "/images/1.jpg", description: "Ongoing Construction of Gatehouse" },
+    { src: "/images/2.jpg", description: "View of the Main Gate" },
+    { src: "/images/3.jpg", description: "Proposed Gatehouse under construction" },
+    { src: "/images/5.jpg", description: "Ongoing Construction at Sagana Ridge" },
+    { src: "/images/6.jpg", description: "Beacon Markings" },
+    { src: "/images/7.jpg", description: "Water Feature inside Sagana Ridge" },
+    { src: "/images/8.jpg", description: "Chainlink Fence Surrounding the Project" },
+    { src: "/images/9.jpg", description: "Site Meeting at Sagana Ridge" },
+    { src: "/images/10.jpg", description: "Spectacular Lanscape Views from Sagana Ridge" },
+    { src: "/images/11.jpg", description: "Ongoing civil Road works " },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +22,7 @@ export default function Gallery() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -49,8 +48,8 @@ export default function Gallery() {
   };
 
   return (
-    <div id="gallery" className="px-4 md:px-10 lg:px-20 py-20">
-      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-center">
+    <div id="gallery" className="px-4 md:px-10 lg:px-20 scroll-mt-[200px]">
+      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-left">
         Project Gallery
       </h2>
 
@@ -63,11 +62,11 @@ export default function Gallery() {
           ❮
         </button>
 
-        <div className="relative w-full h-[420px] flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-[700px] flex items-center justify-center overflow-hidden">
           {images.map((img, index) => (
             <div
               key={index}
-              className={`absolute w-[60%] h-[400px] rounded-lg overflow-hidden shadow-lg transition-all duration-500 ease-in-out ${getSlideStyle(index)}`}
+              className={`absolute w-[80%] h-[600px] rounded-lg overflow-hidden shadow-lg transition-all duration-500 ease-in-out ${getSlideStyle(index)}`}
             >
               <Image
                 src={img.src}

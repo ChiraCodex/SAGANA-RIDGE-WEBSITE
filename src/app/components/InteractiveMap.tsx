@@ -49,15 +49,16 @@ export default function InteractiveMap({
   ],
   locateControl = true,
 }: InteractiveMapProps) {
+  const [isClient, setIsClient] = useState(false); // track client-only
   const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>(markers);
   const mapRef = useRef<L.Map | null>(null);
 
-  // Fix Leaflet icons only on client
+  // Ensure Leaflet icons are only set on the client
   useEffect(() => {
+    setIsClient(true);
     if (typeof window === "undefined") return;
-    // @ts-expect-error: _getIconUrl does not exist in current Leaflet typings
-    delete L.Icon.Default.prototype._getIconUrl;
 
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -101,6 +102,9 @@ export default function InteractiveMap({
 
   const mapCenter = useMemo(() => center, [center]);
 
+  // Render only on the client
+  if (!isClient) return null;
+
   return (
     <div
       className={`relative w-full h-[70vh] rounded-2xl overflow-hidden ${
@@ -122,7 +126,7 @@ export default function InteractiveMap({
         scrollWheelZoom={true}
         className="w-full h-full"
         ref={(map) => {
-          if (map) mapRef.current = map; // save map instance
+          if (map) mapRef.current = map;
         }}
       >
         <TileLayer

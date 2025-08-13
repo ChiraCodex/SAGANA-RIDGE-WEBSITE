@@ -33,8 +33,8 @@ export default function News() {
   ];
 
   return (
-    <main id="news" className="min-h-[100vh] pt-40 px-4 md:px-10 lg:px-20">
-      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-center">
+    <main id="news" className="min-h-[100vh] scroll-mt-[200px] px-4 md:px-10 lg:px-20">
+      <h2 className="uppercase font-bold text-2xl md:text-3xl mb-6 text-brand-primary text-left">
         Blog
       </h2>
 

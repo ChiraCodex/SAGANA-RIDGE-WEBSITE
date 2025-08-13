@@ -2,7 +2,7 @@ export default function About() {
   return (
     <main
       id="about"
-      className="min-h-[100vh] relative pt-32 md:pt-40 px-4 md:px-10 lg:px-20 flex flex-col md:flex-row gap-8"
+      className="min-h-[100vh] relative scroll-mt-[180px] md:pt-40 px-4 md:px-10 lg:px-20 flex flex-col md:flex-row gap-8"
     >
       {/* Left Column */}
       <div className="flex-1 flex flex-col gap-6">
@@ -21,24 +21,39 @@ export default function About() {
         <button className="self-start group">
           <a href="#contacts">
             <span className="uppercase bg-accent-orange hover:bg-brand-primary border-2 rounded-xl p-2 font-semibold group-hover:text-white border-brand-primary">
-            Request More Information
+            <a href="#contacts">
+              Request More Information
+            </a>
           </span>
           </a>
         </button>
       </div>
 
       {/* Right Column */}
-      <div className="flex-1 flex flex-col gap-6">
-        <div className="bg-slate-400 rounded-xl h-64 md:h-80 w-full mb-6"></div>
-        <h2 className="uppercase font-bold text-xl md:text-2xl text-brand-primary mb-2">
-          Some Text
+      <div className="flex-1 flex flex-col gap-16">
+        <div className="bg-accent-gray rounded-xl mt-4 md:mt0 p-2 md:h-80 w-full mb-6">
+          <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-lg">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/_yhE9Wo-OtQ"
+                title="Feature Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+        </div>
+        {/* <div className="h-48">
+          <h2 className="uppercase font-bold text-xl md:text-2xl text-brand-primary mb-2">
+          Meet The Team
         </h2>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 -mt-16 md:-mt-0 ">
           {[1, 2, 3].map((_, idx) => (
-            <div key={idx} className="bg-accent-gray p-4 rounded-xl flex flex-col">
-              <div className="bg-slate-400 rounded-xl h-48 md:h-60 mb-4 w-full"></div>
+            <div key={idx} className=" p-4 shadow-md rounded-xl flex flex-col">
+              <div className="bg-slate-400 rounded-xl h-48 md:h-40 mb-4 w-full"></div>
+              <h3 className="font-bold mb-2">Name</h3>
               <h3 className="font-bold mb-2">Title</h3>
               <button className="bg-brand-primary w-full py-2 rounded-lg hover:bg-brand-secondary transition">
                 <p className="text-white font-semibold text-center">See Details</p>
@@ -46,6 +61,7 @@ export default function About() {
             </div>
           ))}
         </div>
+        </div> */}
       </div>
     </main>
   );

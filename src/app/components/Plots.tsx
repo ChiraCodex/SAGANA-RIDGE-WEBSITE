@@ -11,11 +11,12 @@ export default function Plots() {
   return (
     <main
       id="plots"
-      className="relative flex flex-col lg:flex-row gap-8 min-h-[80vh] px-4 md:px-10 lg:px-20 pt-20"
+      className="relative flex flex-col lg:flex-row gap-8 min-h-[80vh] px-4 md:px-10 lg:px-20 pt-20 scroll-mt-[200px]"
     >
       {/* Plot Listings */}
       <div className="flex-1 flex flex-col gap-8">
-        <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
+        <div>
+          <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
           Available Plots
         </h2>
 
@@ -28,6 +29,8 @@ export default function Plots() {
               <li>6 Commercial Plots @ KSh.900,000</li>
             </ul>
           </div>
+        </div>
+        </div>
 
           {/* Payment Plans */}
           <div className="flex-1">
@@ -46,13 +49,13 @@ export default function Plots() {
               <li>1/8 Acre serviced plots @ KSh.750,000</li>
             </ul>
           </div>
-        </div>
+        
       </div>
 
       {/* Map */}
       <div className="flex-1 mt-8 lg:mt-0 relative">
         <h2 className="uppercase font-bold text-xl md:text-2xl mb-2 text-brand-primary">
-          Plot Locations and Sizes
+          Sagana Ridge Site Location
         </h2>
         <div className="w-full h-68 md:h-80 lg:h-[600px] bg-accent-gray shadow-sm relative z-10 rounded-lg overflow-hidden">
           <InteractiveMap />
