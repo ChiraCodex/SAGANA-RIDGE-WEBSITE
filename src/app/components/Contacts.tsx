@@ -11,14 +11,14 @@ export default function Contacts() {
           <p className="text-lg md:text-xl">We’re here to help you with any questions or inquiries you may have about Sagana Ridge. Please feel free to reach out to us using the information below:</p>
           <div className="grid gap-2 text-base md:text-lg">
             <p className="font-bold">General Inquiries</p>
-             <a href="mailto:sales@saganaridge.com" className="text-blue-600 underline">
-              sales@saganaridge.com
+             <a href="mailto:saganaridgelimited@gmail.com" className="text-blue-600 underline">
+              saganaridgelimited@gmail.com
             </a>
             <div className="grid gap-4">
               <p className="font-bold">Phone</p>
-            <span>+254 712 345 678</span>
-            <span>+254 700 123 456</span>
+            <span>+254 706 380 244</span>
             </div>
+            <hr/>
             <div className="grid gap-4">
               <p className="font-bold">Office Hours</p>
             <span>Monday to Friday: 8:30 AM - 5:00 PM</span>
@@ -27,10 +27,11 @@ export default function Contacts() {
             </div>
             <div className="grid gap-4">
               <p className="font-bold">Visit Us</p>
+              <hr/>
             <span>Office Location:</span>
             <span>Sagana Ridge Development Office
 </span>
-            <span>**Physical Address</span>
+            <span>P.O BOX 2078 - 10400,<br/>Nanyuki</span>
             
             </div>
            

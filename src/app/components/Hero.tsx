@@ -4,7 +4,7 @@ import {  MouseIcon } from "lucide-react";
 
 export default function Hero() {
   return (
-    <main className="relative w-full h-screen pt-32">
+    <main id="home" className="relative w-full h-screen pt-32">
       {/* Background Image */}
       <Image
         src={heroBg}

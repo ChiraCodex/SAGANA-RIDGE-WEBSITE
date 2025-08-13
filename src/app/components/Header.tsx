@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, Mail } from "lucide-react";
 import logo from "../../../public/images/SaganaRidge-logo.png";
 import Image from "next/image";
 
@@ -9,16 +9,19 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed w-full bg-white uppercase py-4 shadow-sm z-50 px-6">
+      <header className="fixed flex flex-col-reverse gap-4 w-full bg-white uppercase py-4 shadow-sm z-50 px-6">
         {/* Top info bar */}
-        <div className="hidden md:flex justify-between items-center mb-2 text-sm">
-          <p>
-            Office Location<br />
-            Address
-          </p>
-          <div className="flex items-center gap-4">
-            <Phone />
-            <p>+254 722 123 456</p>
+        <div className="bg-accent-green p-2 lowercase flex justify-between items-center mb-2 text-sm">
+          <div className="text-left">
+            <span className="uppercase font-bold">For Inquiries:</span>
+            <div className="flex justify-end items-center gap-1">
+              <Mail className="w-4 h-4"/>
+            <a className="text-black underline-none" href="mailto:saganaridgelimited@gmail.com">saganaridgelimited@gmail.com</a>
+            </div>
+          </div>
+          <div className="font-bold flex justify-end items-center gap-1 mt-4">
+            <Phone className="w-4 h-4"/>
+            <p>+254 706 380 244</p>
           </div>
         </div>
 
@@ -26,7 +29,9 @@ export default function Header() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div>
-            <Image src={logo} alt="Sagana Ridge Logo" width={200} height={100} />
+            <a href="#home">
+              <Image src={logo} alt="Sagana Ridge Logo" width={200} height={100} />
+            </a>
           </div>
 
           {/* Navigation - hidden on mobile */}

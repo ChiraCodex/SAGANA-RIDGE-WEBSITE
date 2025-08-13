@@ -19,9 +19,11 @@ export default function About() {
         </article>
 
         <button className="self-start group">
-          <span className="uppercase bg-accent-orange hover:bg-brand-primary border-2 rounded-xl p-2 font-semibold group-hover:text-white border-brand-primary">
+          <a href="#contacts">
+            <span className="uppercase bg-accent-orange hover:bg-brand-primary border-2 rounded-xl p-2 font-semibold group-hover:text-white border-brand-primary">
             Request More Information
           </span>
+          </a>
         </button>
       </div>
 
