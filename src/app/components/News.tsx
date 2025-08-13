@@ -41,7 +41,7 @@ export default function News() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
         {newsItems.map((item, index) => (
           <div key={index} className="bg-accent-gray rounded-xl overflow-hidden shadow-md cursor-pointer"
-            onClick={() => setSelectedImage(item.img.src || item.img)}>
+            onClick={() => setSelectedImage(item.img.src)}>
             <div className="w-full h-64 md:h-48 lg:h-64 relative">
               <Image
                 src={item.img}
