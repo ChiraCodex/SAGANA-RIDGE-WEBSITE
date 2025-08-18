@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -26,6 +26,7 @@ export type InteractiveMapProps = {
   locateControl?: boolean;
 };
 
+// ClickMarker for adding new markers by clicking on map
 function ClickMarker({ onAdd }: { onAdd: (pos: [number, number]) => void }) {
   useMapEvents({
     click(e) {
@@ -49,11 +50,11 @@ export default function InteractiveMap({
   ],
   locateControl = true,
 }: InteractiveMapProps) {
-  const [isClient, setIsClient] = useState(false); // track client-only
+  const [isClient, setIsClient] = useState(false); // render only on client
   const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>(markers);
   const mapRef = useRef<L.Map | null>(null);
 
-  // Ensure Leaflet icons are only set on the client
+  // Set Leaflet icons on client
   useEffect(() => {
     setIsClient(true);
     if (typeof window === "undefined") return;
@@ -68,42 +69,44 @@ export default function InteractiveMap({
     });
   }, []);
 
-  const handleAddMarker = (pos: [number, number]) => {
+  const handleAddMarker = useCallback((pos: [number, number]) => {
     const id = `${pos[0].toFixed(5)},${pos[1].toFixed(5)}`;
     setDynamicMarkers((prev) => [
       ...prev,
       { id, position: pos, title: "Dropped pin", description: "Custom marker" },
     ]);
-  };
+  }, []);
 
   const handleLocate = () => {
     if (!navigator.geolocation || !mapRef.current) return;
-    navigator.geolocation.getCurrentPosition(
-  (res: GeolocationPosition) => {
-    const latlng: [number, number] = [
-      res.coords.latitude,
-      res.coords.longitude,
-    ];
-    mapRef.current!.flyTo(latlng, 15);
-    setDynamicMarkers((prev) => [
-      ...prev,
-      {
-        id: "you-are-here",
-        position: latlng,
-        title: "You are here",
-        description: new Date().toLocaleString(),
-      },
-    ]);
-  },
-  () => {},
-  { enableHighAccuracy: true, timeout: 8000 }
-);
 
+    navigator.geolocation.getCurrentPosition(
+      (res: GeolocationPosition) => {
+        const latlng: [number, number] = [
+          res.coords.latitude,
+          res.coords.longitude,
+        ];
+        mapRef.current!.flyTo(latlng, 15);
+        setDynamicMarkers((prev) => [
+          ...prev,
+          {
+            id: "you-are-here",
+            position: latlng,
+            title: "You are here",
+            description: new Date().toLocaleString(),
+          },
+        ]);
+      },
+      (err: GeolocationPositionError) => {
+        console.error("Geolocation error:", err.message);
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
   };
 
   const mapCenter = useMemo(() => center, [center]);
 
-  // Render only on the client
+  // Only render map on client
   if (!isClient) return null;
 
   return (

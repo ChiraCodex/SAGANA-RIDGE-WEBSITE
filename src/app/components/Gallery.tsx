@@ -72,7 +72,7 @@ export default function Gallery() {
                 className="object-cover"
               />
               {index === currentIndex && (
-                <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-4 py-2 rounded-lg text-sm sm:text-lg">
+                <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-brand-secondary bg-opacity-80 text-white px-4 py-2 rounded-lg text-sm sm:text-lg">
                   {img.description}
                 </p>
               )}

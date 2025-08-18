@@ -14,6 +14,7 @@ import dummyFloor2 from "../../../public/images/floorplan2.jpg";
 // Roof images
 import roofCountry from "../../../public/images/roof-country.jpg";
 import roofFlat from "../../../public/images/roof-flat.jpeg";
+import { BedIcon, ShowerHead } from "lucide-react";
 
 interface HouseType {
   name: string;
@@ -138,15 +139,15 @@ export default function HomeTypes() {
           </button>
 
           {selectedHouse && (
-            <div className="p-6 overflow-y-auto flex-1 text-center">
-              <h3 className="text-2xl font-bold mb-4">{selectedHouse.name}</h3>
+            <div className="p-6 overflow-y-auto flex-1 text-left ">
+              <h3 className="text-2xl font-bold mb-4 text-brand-primary">{selectedHouse.name}</h3>
 
               {/* Carousel Image */}
               <Image
                 src={selectedHouse.carousel[carouselIndex]}
                 alt={`Slide ${carouselIndex + 1}`}
                 width={900}
-                height={900}
+                height={500}
                 className="rounded-lg mb-4 object-cover mx-auto"
               />
 
@@ -170,21 +171,34 @@ export default function HomeTypes() {
               </div>
 
               {/* Details */}
-              <div className="space-y-2 text-left max-w-md mx-auto">
-                <p>
+              <div className="flex flex-col justify-between space-y-2 text-left max-w-2xl mx-auto">
+                <div className="flex flex-col gap-2">
+                  <p className="mt-2">{selectedHouse.description}</p>
+                  <p>
                   <strong>Size:</strong> {selectedHouse.size}
                 </p>
-                <p>
-                  <strong>Bedrooms:</strong> {selectedHouse.bedrooms}
+                </div>
+                <hr/>
+                
+                <div>
+                  <p className="flex gap-2">
+                  <BedIcon/><strong> Bedrooms:</strong> {selectedHouse.bedrooms}
                 </p>
-                <p>
-                  <strong>Bathrooms:</strong> {selectedHouse.bathrooms}
+                <p className="flex gap-2">
+                  <ShowerHead/><strong>Bathrooms:</strong> {selectedHouse.bathrooms}
                 </p>
-                <p>
-                  <strong>Price:</strong> {selectedHouse.price}
+                </div>
+                <hr />
+                <div className="flex justify-between items-center">
+                  <p>
+                  <strong> Price:</strong> {selectedHouse.price}
                 </p>
-                <p className="mt-2">{selectedHouse.description}</p>
-              </div>
+                <button className="p-2 rounded-xl bg-brand-primary hover:bg-brand-secondary text-white font-semibold">
+                  <a href="#contacts">Get Quotation </a> 
+                </button> 
+                </div>
+                </div>
+                              
             </div>
           )}
         </div>

@@ -17,15 +17,16 @@ export default function Home() {
       <Head>
         <title>Sagana Ridge -Experience Lifestyle Living</title>
         <meta
-          name="description"
+          name="Sagana Ridge"
           content="Secure your future with affordable plots at Sagana Ridge. Ideal for home or investment. Prime location, ready titles."
         />
       </Head>
       <main>
+          
         <Header />
         <Hero />
         <About />
-        <Features />
+        {/* <Features /> */}
         <Plots/>
         <HomeTypes/>
         <PaymentPlan/>

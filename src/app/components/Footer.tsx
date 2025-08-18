@@ -4,7 +4,7 @@ import { Facebook, Instagram, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <main className="px-4 md:px-10 lg:px-20 bg-accent-gray p-6">
+    <main className="px-4 md:px-10 lg:px-20 bg-accent-gray p-6 pb-0">
       <footer className="flex flex-col lg:flex-row justify-between gap-8">
         
         {/* Logo & About */}
@@ -45,19 +45,21 @@ export default function Footer() {
             Subscribe to our newsletter to get project progress updates
           </span>
           <div className="flex flex-col sm:flex-row gap-2">
-            <input 
+            <form action="POST">
+              <input 
               className="p-2 rounded-xl flex-1 border-2 border-gray-300" 
               type="email" 
               placeholder="Enter Email..." 
-            />
-            <button className="border-2 bg-accent-green p-2 rounded-xl text-white font-bold hover:bg-brand-secondary transition">
+            /></form>
+            <button type="submit" className="border-2 bg-accent-green p-2 rounded-xl text-white font-bold hover:bg-brand-secondary transition">
               Subscribe
             </button>
+            
           </div>
         </div>
       </footer>
       <div className="mt-6">
-        <span className="text-xs  flex justify-center mb-2">Sagana Ridge Development Ltd.&copy; All Rights Reserved. 2025</span>
+        <span className="text-xs  flex justify-center  text-gray-500">Sagana Ridge Development Ltd.&copy; All Rights Reserved. 2025</span>
       </div>
     </main>
   );
