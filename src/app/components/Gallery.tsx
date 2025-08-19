@@ -69,6 +69,7 @@ export default function Gallery() {
                 src={img.src}
                 alt={img.description}
                 fill
+                sizes="auto"
                 className="object-cover"
               />
               {index === currentIndex && (

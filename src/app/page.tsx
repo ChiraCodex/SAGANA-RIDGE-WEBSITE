@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Contacts from "./components/Contacts";
-import Features from "./components/Features";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
 import Hero from "./components/Hero";

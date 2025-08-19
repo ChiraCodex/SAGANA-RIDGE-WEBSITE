@@ -10,6 +10,7 @@ export default function Hero() {
         src={heroBg}
         alt="heroBg Image"
         fill
+        sizes="auto"
         className="object-cover z-0"
         priority
       />

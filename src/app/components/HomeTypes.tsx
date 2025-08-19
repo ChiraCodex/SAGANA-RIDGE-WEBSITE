@@ -92,7 +92,7 @@ export default function HomeTypes() {
           {houseTypes.map((house, idx) => (
             <div
               key={idx}
-              className="bg-accent-gray p-4 rounded-xl shadow-md hover:shadow-lg transition"
+              className="bg-accent-gray/50 backdrop-blur-xl p-4 rounded-xl shadow-md hover:shadow-lg transition"
             >
               <div className="mb-4">
                 <Image

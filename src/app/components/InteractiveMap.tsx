@@ -45,7 +45,7 @@ export default function InteractiveMap({
       id: "sagana-ridge",
       position: [-0.7050556228838573, 37.2051279116434],
       title: "Sagana Ridge",
-      description: "Sagana Ridge Project Site (exact).",
+      description: "Sagana Ridge Project Site .",
     },
   ],
   locateControl = true,
@@ -92,7 +92,7 @@ export default function InteractiveMap({
           {
             id: "you-are-here",
             position: latlng,
-            title: "You are here",
+            title: "You are Here",
             description: new Date().toLocaleString(),
           },
         ]);
@@ -111,7 +111,7 @@ export default function InteractiveMap({
 
   return (
     <div
-      className={`relative w-full h-[70vh] rounded-2xl overflow-hidden ${
+      className={`relative w-full h-[50vh] md:h-[70vh] rounded-2xl overflow-hidden ${
         className ?? ""
       }`}
     >

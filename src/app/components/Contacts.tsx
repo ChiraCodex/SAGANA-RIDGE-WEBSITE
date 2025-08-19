@@ -43,7 +43,7 @@ export default function Contacts() {
           <h1 className=" text-brand-primary text-2xl md:text-3xl font-bold mb-2">Message Us</h1>
           <p className="mb-4">Please fill out the form below to get in touch.</p>
           <form className="flex flex-col gap-4" action="POST">
-            <label className="grid gap-1" htmlFor="name" id="name">
+            <label className="grid gap-1" id="name">
               <span>Full Name</span>
               <input
                 className="border-2 border-accent-gray w-full md:w-3/4 rounded-xl p-2"
@@ -53,7 +53,7 @@ export default function Contacts() {
               />
             </label>
 
-            <label className="grid gap-1" htmlFor="email" id="email">
+            <label className="grid gap-1" id="email">
               <span>Email</span>
               <input
                 className="border-2 border-accent-gray w-full md:w-3/4 rounded-xl p-2"
@@ -63,7 +63,7 @@ export default function Contacts() {
               />
             </label>
 
-            <label className="grid gap-1" htmlFor="phone" id="phone">
+            <label className="grid gap-1"  id="phone">
               <span>Phone Number</span>
               <input
                 className="border-2 border-accent-gray w-full md:w-3/4 rounded-xl p-2"
@@ -73,7 +73,7 @@ export default function Contacts() {
               />
             </label>
 
-            <label className="grid gap-1" htmlFor="message" id="message">
+            <label className="grid gap-1" id="message">
               <span>Message</span>
               <textarea
                 className="border-2 border-accent-gray w-full md:w-3/4 rounded-xl p-2"

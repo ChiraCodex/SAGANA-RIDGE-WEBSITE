@@ -12,7 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://saganaridge.com"), // ✅ Replace with your real domain
   title: "Sagana Ridge",
   description: "Lifestyle Living",
   authors: [
@@ -22,14 +24,14 @@ export const metadata: Metadata = {
     },
   ],
   icons: {
-    icon: "/images/SaganaRidge-logo.png", // favicon
-    apple: "/images/SaganaRidge-logo.png", // Apple touch icon
+    icon: "/images/SaganaRidge-logo.png",
+    apple: "/images/SaganaRidge-logo.png",
   },
   openGraph: {
     title: "Sagana Ridge",
     description: "Lifestyle Living",
-    url: "https://saganaridge.com", // replace with your site URL
-    images: ["/images/SaganaRidge-logo.png"],
+    url: "https://saganaridge.com",
+    images: ["/images/SaganaRidge-logo.png"], // resolved using metadataBase
     siteName: "Sagana Ridge",
     type: "website",
   },
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sagana Ridge",
     description: "Lifestyle Living",
-    images: ["/images/SaganaRidge-logo.png"],
+    images: ["/images/SaganaRidge-logo.png"], // resolved using metadataBase
   },
 };
 

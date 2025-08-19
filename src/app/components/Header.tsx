@@ -45,8 +45,7 @@ export default function Header() {
               <Image
                 src={logo}
                 alt="Sagana Ridge Logo"
-                width={200}
-                height={100}
+                style={{ width: "200px", height: "auto" }}
               />
             </a>
           </div>
@@ -82,7 +81,7 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <button className="uppercase bg-accent-orange hover:bg-brand-primary border-2 rounded-xl p-2 font-semibold border-brand-primary text-white">
-             <a href="#plots">Now Selling</a>
+              <a href="#plots">Now Selling</a>
             </button>
           </div>
 
@@ -98,7 +97,9 @@ export default function Header() {
       {/* Mobile Menu below header */}
       <div
         className={`md:hidden fixed top-[180px] left-0 w-full bg-white/60 backdrop-blur-md z-40 transition-all duration-300 ${
-          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+          isOpen
+            ? "max-h-screen opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
         <nav className="flex flex-col justify-center items-center gap-4 font-bold py-4">
