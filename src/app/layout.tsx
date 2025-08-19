@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://saganaridge.com"), // ✅ Replace with your real domain
+  metadataBase: new URL("https://www.saganaridge.com"), // ✅ Replace with your real domain
   title: "Sagana Ridge",
   description: "Lifestyle Living",
   authors: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sagana Ridge",
     description: "Lifestyle Living",
-    url: "https://saganaridge.com",
+    url: "https://www.saganaridge.com",
     images: ["/images/SaganaRidge-logo.png"], // resolved using metadataBase
     siteName: "Sagana Ridge",
     type: "website",

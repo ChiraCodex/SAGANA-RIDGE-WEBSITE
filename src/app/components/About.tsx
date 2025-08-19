@@ -10,7 +10,7 @@ export default function About() {
           <h1 className="text-3xl md:text-4xl lg:text-5xl text-brand-primary font-bold capitalize mb-4">
             Why Choose Sagana Ridge
           </h1>
-          <p className=" ml-0 md:ml-4">
+          <p className="text-base md:text-lg ml-0 md:ml-4">
             Discover the epitome of lifestyle living at Sagana Ridge, where modern amenities meet serene surroundings. Nestled within a gated community, our serviced plots offer easy access via well-maintained murram roads and essential utilities, including water from MUWASCO and power with a transformer conveniently located at the gate. Enjoy peace of mind with a dedicated management committee ensuring security and community engagement, including a church and vibrant social amenities like a kids&apos; play area, park, gazebo, and stunning water features.
           </p>
 

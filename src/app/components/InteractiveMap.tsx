@@ -8,7 +8,7 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import L from "leaflet";
+import L, { LeafletMouseEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 export type MapMarker = {
@@ -26,10 +26,10 @@ export type InteractiveMapProps = {
   locateControl?: boolean;
 };
 
-// ClickMarker for adding new markers by clicking on map
+// Component for adding markers by clicking the map
 function ClickMarker({ onAdd }: { onAdd: (pos: [number, number]) => void }) {
   useMapEvents({
-    click(e) {
+    click(e: LeafletMouseEvent) {
       onAdd([e.latlng.lat, e.latlng.lng]);
     },
   });
@@ -44,22 +44,22 @@ export default function InteractiveMap({
     {
       id: "sagana-ridge",
       position: [-0.7050556228838573, 37.2051279116434],
-      title: "Sagana Ridge",
-      description: "Sagana Ridge Project Site .",
+      title: "Sagana Ridge ",
+      description: "Sagana Ridge Location",
     },
   ],
   locateControl = true,
 }: InteractiveMapProps) {
-  const [isClient, setIsClient] = useState(false); // render only on client
   const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>(markers);
   const mapRef = useRef<L.Map | null>(null);
 
-  // Set Leaflet icons on client
+  // Set up default Leaflet marker icons (only runs on client)
   useEffect(() => {
-    setIsClient(true);
     if (typeof window === "undefined") return;
 
-    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    // Fix marker icons
+    const IconProto = L.Icon.Default.prototype as typeof L.Icon.Default.prototype;
+    delete IconProto._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -78,7 +78,7 @@ export default function InteractiveMap({
   }, []);
 
   const handleLocate = () => {
-    if (!navigator.geolocation || !mapRef.current) return;
+    if (typeof navigator === "undefined" || !mapRef.current) return;
 
     navigator.geolocation.getCurrentPosition(
       (res: GeolocationPosition) => {
@@ -86,7 +86,7 @@ export default function InteractiveMap({
           res.coords.latitude,
           res.coords.longitude,
         ];
-        mapRef.current!.flyTo(latlng, 15);
+        mapRef.current?.flyTo(latlng, 15);
         setDynamicMarkers((prev) => [
           ...prev,
           {
@@ -97,7 +97,7 @@ export default function InteractiveMap({
           },
         ]);
       },
-      (err: GeolocationPositionError) => {
+      (err) => {
         console.error("Geolocation error:", err.message);
       },
       { enableHighAccuracy: true, timeout: 8000 }
@@ -105,9 +105,6 @@ export default function InteractiveMap({
   };
 
   const mapCenter = useMemo(() => center, [center]);
-
-  // Only render map on client
-  if (!isClient) return null;
 
   return (
     <div
@@ -129,8 +126,8 @@ export default function InteractiveMap({
         zoom={zoom}
         scrollWheelZoom={true}
         className="w-full h-full"
-        ref={(map) => {
-          if (map) mapRef.current = map;
+        whenReady={(mapInstance: L.Map | null) => {
+          mapRef.current = mapInstance;
         }}
       >
         <TileLayer
