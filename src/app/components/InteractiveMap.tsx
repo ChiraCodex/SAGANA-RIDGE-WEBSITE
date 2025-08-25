@@ -50,16 +50,17 @@ export default function InteractiveMap({
   ],
   locateControl = true,
 }: InteractiveMapProps) {
-  const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>(markers);
+  const [dynamicMarkers, setDynamicMarkers] = useState<MapMarker[]>([]);
+  const [isClient, setIsClient] = useState(false);
   const mapRef = useRef<L.Map | null>(null);
 
   // Set up default Leaflet marker icons (only runs on client)
   useEffect(() => {
+    setIsClient(true);
+    
     if (typeof window === "undefined") return;
 
     // Fix marker icons
-    const IconProto = L.Icon.Default.prototype as typeof L.Icon.Default.prototype;
-    delete IconProto._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -68,6 +69,13 @@ export default function InteractiveMap({
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     });
   }, []);
+
+  // Initialize markers after component mounts on client
+  useEffect(() => {
+    if (isClient) {
+      setDynamicMarkers(markers);
+    }
+  }, [isClient, markers]);
 
   const handleAddMarker = useCallback((pos: [number, number]) => {
     const id = `${pos[0].toFixed(5)},${pos[1].toFixed(5)}`;
@@ -105,6 +113,19 @@ export default function InteractiveMap({
   };
 
   const mapCenter = useMemo(() => center, [center]);
+
+  // Don't render map on server
+  if (!isClient) {
+    return (
+      <div 
+        className={`relative w-full h-[50vh] md:h-[70vh] rounded-2xl overflow-hidden ${
+          className ?? ""
+        } flex items-center justify-center bg-gray-100`}
+      >
+        <p className="text-gray-500">Loading map...</p>
+      </div>
+    );
+  }
 
   return (
     <div
