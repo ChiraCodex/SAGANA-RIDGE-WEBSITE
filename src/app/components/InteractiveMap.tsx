@@ -114,6 +114,13 @@ export default function InteractiveMap({
 
   const mapCenter = useMemo(() => center, [center]);
 
+  // Set the map reference when it's ready
+  useEffect(() => {
+    if (mapRef.current) {
+      // Map is ready, you can perform any additional setup here
+    }
+  }, []);
+
   // Don't render map on server
   if (!isClient) {
     return (
@@ -147,9 +154,7 @@ export default function InteractiveMap({
         zoom={zoom}
         scrollWheelZoom={true}
         className="w-full h-full"
-        whenReady={(mapInstance: L.Map | null) => {
-          mapRef.current = mapInstance;
-        }}
+        ref={mapRef} // Use ref instead of whenReady
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
